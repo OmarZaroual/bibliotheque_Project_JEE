@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Styles pour l'arrière-plan */
+        body {
+            background: url('background.jpg') no-repeat center center fixed; /* Remplacez 'background.jpg' par le chemin de votre image */
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+        }
+
+        /* Centrage du contenu */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Style pour le bloc des boutons */
+        .btn-container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-container h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Style des boutons */
+        .btn-custom {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        .btn-login {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-register {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Conteneur centré -->
+    <div class="center-container">
+        <div class="btn-container">
+            <h1>Bienvenue à la Bibliothèque</h1>
+            <p>Veuillez vous connecter ou créer un compte pour accéder à nos services.</p>
+            <!-- Boutons Login et Register -->
+            <a href="login.jsp" class="btn btn-custom btn-login">Se connecter</a>
+            <a href="register.jsp" class="btn btn-custom btn-register">S'inscrire</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle avec Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
