@@ -1,5 +1,7 @@
 com\bibliotheque\bibliothequeprj\JakartaRestConfiguration.class
 com\bibliotheque\utils\LivreService.class
+com\bibliotheque\controllers\ModifierLivreServlet.class
+com\bibliotheque\controllers\RechercherLivresServlet.class
 com\bibliotheque\controllers\RetourServlet.class
 com\bibliotheque\models\Livre.class
 com\bibliotheque\bibliothequeprj\resources\JakartaEE8Resource.class
@@ -10,6 +12,5 @@ com\bibliotheque\controllers\SupprimerLivreServlet.class
 com\bibliotheque\utils\TestConnection.class
 com\bibliotheque\controllers\EmprunterServlet.class
 com\bibliotheque\controllers\AjouterLivreServlet.class
-com\bibliotheque\controllers\LogoutServlet.class
 com\bibliotheque\models\Emprunt.class
 com\bibliotheque\utils\EmpruntService.class

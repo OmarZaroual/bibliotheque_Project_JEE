@@ -4,84 +4,43 @@
  */
 package com.bibliotheque.controllers;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.bibliotheque.utils.DatabaseConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author HP
- */
-@WebServlet(name = "SupprimerLivreServlet", urlPatterns = {"/SupprimerLivreServlet"})
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+@WebServlet("/SupprimerLivreServlet")
 public class SupprimerLivreServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SupprimerLivreServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SupprimerLivreServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String livreId = request.getParameter("id");  // Get the book ID from the request parameter
+
+        if (livreId != null) {
+            try (Connection connection = DatabaseConnection.getConnection()) {
+                // SQL query to delete the book by id_livre
+                String query = "DELETE FROM livre WHERE id_livre = ?";
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setInt(1, Integer.parseInt(livreId));
+                    int rowsDeleted = statement.executeUpdate();
+
+                    if (rowsDeleted > 0) {
+                        response.sendRedirect("livresBibliothecaire.jsp?success=true");  // Success: Redirect with success flag
+                    } else {
+                        response.sendRedirect("livresBibliothecaire.jsp?success=false&errorMessage=Erreur%20de%20suppression%20du%20livre.");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.sendRedirect("livresBibliothecaire.jsp?success=false&errorMessage=Erreur%20de%20connexion%20à%20la%20base%20de%20données.");
+            }
+        } else {
+            response.sendRedirect("livresBibliothecaire.jsp?success=false&errorMessage=Livre%20introuvable.");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
